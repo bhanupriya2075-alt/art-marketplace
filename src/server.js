@@ -70,8 +70,9 @@ async function start() {
   try {
     await db.query('SELECT 1');
     console.log(`[db] connected to ${config.db.database}`);
-  } catch (err) {
-    console.error('[db] connection failed:', err.message);
+    } catch (err) {
+    console.error('[db] connection failed:', err && err.message ? err.message : err);
+    console.error('[db] full error:', err);
     console.error('     Check your .env settings and that PostgreSQL is running.');
     process.exit(1);
   }
